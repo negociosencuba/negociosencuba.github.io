@@ -1,1 +1,1 @@
-# Comercios Cubanoss en la red.
+# Comercios Cubanos en la red.
