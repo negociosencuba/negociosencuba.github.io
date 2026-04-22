@@ -8,10 +8,6 @@ Este proyecto nace con el objetivo de conectar a la comunidad con el talento y e
 A todos los emprendedores cubanos que, con creatividad y resiliencia, construyen un futuro mejor desde sus pequeños negocios.
 Y a la comunidad de software libre por hacer posible herramientas accesibles para todos.
 
-Santiago de Cuba
-
-https://techsolutionscuba.github.io
-
 ---
 
 ¡Hecho en Cuba, con mucho ♥️ y código abierto!
