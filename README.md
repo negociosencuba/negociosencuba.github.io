@@ -9,6 +9,7 @@ A todos los emprendedores cubanos que, con creatividad y resiliencia, construyen
 Y a la comunidad de software libre por hacer posible herramientas accesibles para todos.
 
 Santiago de Cuba
+
 https://techsolutionscuba.github.io
 
 ---
