@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Activación por Huella</title>
+    <style>
+        *{box-sizing:border-box}body{font-family:system-ui, -apple-system, 'Segoe UI', Roboto;background:#f1f5f9;color:#0f172a;padding:20px;margin:0}.container{max-width:500px;margin:0 auto}.card{background:white;border-radius:28px;padding:24px;margin-top:40px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);border:1px solid #e2e8f0}.card-title{font-size:1.3rem;font-weight:600;margin-bottom:20px;border-left:4px solid #3b82f6;padding-left:12px}input,button{width:100%;padding:12px 16px;margin-bottom:12px;border-radius:60px;border:1px solid #cbd5e1;font-size:16px}button{background:#3b82f6;color:white;font-weight:600;border:none;cursor:pointer}.fingerprint-box{background:#f8fafc;border-radius:20px;padding:16px;text-align:center;font-family:monospace;font-size:1.4rem;letter-spacing:2px;margin:16px 0;border:1px dashed #3b82f6}.mensaje{background:#ef4444;color:white;padding:10px;border-radius:60px;text-align:center;margin-top:12px;display:none}.contenido-app{display:none}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="activacionScreen" class="card">
+        <div class="card-title">🔐 Activación del dispositivo</div>
+        <p>Esta aplicación debe ser activada para este equipo.</p>
+        <div class="card-title">📱 Huella de tu dispositivo</div>
+        <div class="fingerprint-box" id="fingerprintDisplay">Calculando...</div>
+        <p>Envía este código al administrador para recibir el código de activación.</p>
+        <div class="card-title">✏️ Código de activación</div>
+        <input type="text" id="codigoActivacion" placeholder="Código de 6 dígitos">
+        <button id="btnActivar">Activar dispositivo</button>
+        <div id="activacionMsg" class="mensaje"></div>
+        <p style="font-size:0.7rem; text-align:center; margin-top:16px;">La aplicación quedará vinculada a este dispositivo.</p>
+    </div>
+    <div id="contenidoApp" class="contenido-app">
+        <h1>📱 Mi Aplicación</h1>
+        <p>Contenido protegido. El dispositivo está activado correctamente.</p>
+    </div>
+</div>
+<script>
+    // Clave maestra ofuscada en Base64: "$7021$" -> "JDcwMjEk"
+    const SECRET_KEY_B64 = "JDcwMjEk";
+    function obtenerClaveMaestra() {
+        return atob(SECRET_KEY_B64);
+    }
+
+    function obtenerHuellaDispositivo() {
+        const screenRes = `${screen.width}x${screen.height}x${screen.colorDepth}`;
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const language = navigator.language;
+        const hardware = navigator.hardwareConcurrency || 'unknown';
+        const userAgent = navigator.userAgent;
+        let canvasFP = '';
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = "top";
+            ctx.font = "14px Arial";
+            ctx.fillStyle = "#f60";
+            ctx.fillRect(0, 0, 100, 50);
+            ctx.fillStyle = "#069";
+            ctx.fillText("Huella", 2, 15);
+            canvasFP = canvas.toDataURL();
+        } catch(e) { canvasFP = 'no-canvas'; }
+        let webglFP = '';
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (gl) {
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (debugInfo) webglFP = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || '';
+            }
+        } catch(e) { webglFP = 'no-webgl'; }
+        const raw = `${screenRes}|${timezone}|${language}|${hardware}|${userAgent}|${canvasFP}|${webglFP}`;
+        let hash = 0;
+        for (let i = 0; i < raw.length; i++) {
+            hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+            hash |= 0;
+        }
+        return (hash >>> 0).toString(16).padStart(8, '0').toUpperCase();
+    }
+
+    function generarCodigoActivacion(huella, claveSecreta) {
+        const input = huella + claveSecreta;
+        let hash = 0;
+        for (let i = 0; i < input.length; i++) {
+            hash = ((hash << 5) - hash) + input.charCodeAt(i);
+            hash |= 0;
+        }
+        return Math.abs(hash % 1000000).toString().padStart(6, '0');
+    }
+
+    function verificarActivacion() {
+        const huellaGuardada = localStorage.getItem('dispositivo_huella');
+        const activado = localStorage.getItem('dispositivo_activado');
+        if (activado === 'true' && huellaGuardada) {
+            const huellaActual = obtenerHuellaDispositivo();
+            if (huellaActual === huellaGuardada) return true;
+        }
+        return false;
+    }
+
+    function activarDispositivo(codigoIngresado) {
+        const huellaActual = obtenerHuellaDispositivo();
+        const clave = obtenerClaveMaestra();
+        const codigoEsperado = generarCodigoActivacion(huellaActual, clave);
+        if (codigoIngresado === codigoEsperado) {
+            localStorage.setItem('dispositivo_activado', 'true');
+            localStorage.setItem('dispositivo_huella', huellaActual);
+            return true;
+        }
+        return false;
+    }
+
+    window.addEventListener('load', () => {
+        const activacionDiv = document.getElementById('activacionScreen');
+        const contenidoDiv = document.getElementById('contenidoApp');
+        const fingerprintSpan = document.getElementById('fingerprintDisplay');
+        if (!verificarActivacion()) {
+            const huella = obtenerHuellaDispositivo();
+            fingerprintSpan.innerText = huella;
+            activacionDiv.style.display = 'block';
+            contenidoDiv.style.display = 'none';
+            document.getElementById('btnActivar').addEventListener('click', () => {
+                const codigo = document.getElementById('codigoActivacion').value.trim();
+                if (activarDispositivo(codigo)) {
+                    location.reload();
+                } else {
+                    const msg = document.getElementById('activacionMsg');
+                    msg.innerText = 'Código incorrecto. Verifica con el administrador.';
+                    msg.style.display = 'block';
+                    setTimeout(() => msg.style.display = 'none', 3000);
+                }
+            });
+        } else {
+            activacionDiv.style.display = 'none';
+            contenidoDiv.style.display = 'block';
+        }
+    });
+</script>
+</body>
+</html>
