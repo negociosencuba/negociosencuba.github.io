@@ -2,549 +2,112 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Directorio de Negocios en Cuba | Por Provincias</title>
-    <!-- Google Fonts & Font Awesome CDN -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios en Cuba</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        :root { --p: #0F4C3A; --a: #2E8B57; --bg: #F8FAFC; --w: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: #334155; padding-bottom: 50px; }
+        
+        .hero { background: var(--w); padding: 40px 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .hero h1 { color: var(--p); font-size: 2rem; margin-bottom: 20px; }
+        .search-box { max-width: 600px; margin: 0 auto; position: relative; }
+        .search-box input { width: 100%; padding: 14px 20px 14px 50px; border-radius: 50px; border: 2px solid #E2E8F0; font-size: 1rem; transition: 0.3s; }
+        .search-box input:focus { border-color: var(--a); outline: none; }
+        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #94A3B8; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .province-block { margin-bottom: 40px; animation: fade 0.5s ease; }
+        .province-title { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #E2E8F0; }
+        .province-title h2 { color: var(--p); font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .count { background: var(--a); color: white; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        
+        .biz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
+        .biz-card { background: var(--w); border-radius: 16px; padding: 20px; border: 1px solid #E2E8F0; transition: transform 0.2s, box-shadow 0.2s; }
+        .biz-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--a); }
+        
+        .biz-header { margin-bottom: 15px; padding-bottom: 15px; border-bottom:1px solid #F1F5F9; }
+        .biz-title { font-weight: 700; font-size: 1.25rem; color: #1E293B; margin-bottom: 5px; }
+        .biz-prov { display: inline-block; background: #F0FDF4; color: #166534; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
+        
+        .biz-body { font-size: 0.95rem; color: #475569; }
+        .biz-desc { margin-bottom: 15px; line-height: 1.6; min-height: 3.5em; }
+        
+        .biz-meta { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+        .meta-item { display: flex; align-items: center; gap: 10px; color: #64748B; font-size: 0.9rem; }
+        .meta-item i { color: var(--a); width: 20px; text-align: center; }
+        .meta-item a { color: var(--p); text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .meta-item a:hover { color: var(--a); text-decoration: underline; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f4f7fb;
-            color: #1e2a3e;
-            line-height: 1.5;
-            padding: 2rem 1.5rem;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Header */
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0b3b5f, #1b7e5c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .hero h1 i {
-            background: none;
-            color: #1b7e5c;
-            font-size: 2.2rem;
-        }
-
-        .hero p {
-            color: #4a627a;
-            max-width: 650px;
-            margin: 0.75rem auto 0;
-            font-size: 1.1rem;
-        }
-
-        /* Barra de búsqueda */
-        .search-section {
-            background: white;
-            border-radius: 2rem;
-            padding: 0.5rem 1rem 0.5rem 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .search-box {
-            flex: 3;
-            min-width: 200px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f8fafc;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
-        }
-
-        .search-box:focus-within {
-            border-color: #1b7e5c;
-            box-shadow: 0 0 0 3px rgba(27,126,92,0.2);
-        }
-
-        .search-box i {
-            color: #7e8b9c;
-            font-size: 1.1rem;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            width: 100%;
-            outline: none;
-            font-weight: 500;
-            color: #0f2b3d;
-        }
-
-        .search-box input::placeholder {
-            color: #94a3b8;
-            font-weight: 400;
-        }
-
-        .reset-btn {
-            background: #eef2f6;
-            border: none;
-            border-radius: 40px;
-            padding: 0.6rem 1.5rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #2c3e50;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .reset-btn:hover {
-            background: #e2e8f0;
-            transform: scale(0.97);
-        }
-
-        .result-stats {
-            font-size: 0.9rem;
-            background: #eef2ff;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            color: #1e4a76;
-            font-weight: 500;
-        }
-
-        /* Layout de provincias (grid de secciones) */
-        .provinces-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .provincia-card {
-            background: white;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
-            transition: all 0.2s;
-            border: 1px solid #e9edf2;
-        }
-
-        .provincia-header {
-            background: linear-gradient(95deg, #f0f6fa 0%, #ffffff 100%);
-            padding: 1rem 1.8rem;
-            border-bottom: 3px solid #2c9b77;
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: space-between;
-        }
-
-        .provincia-header h2 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: #0b3b2f;
-        }
-
-        .provincia-header h2 i {
-            font-size: 1.6rem;
-            color: #2c9b77;
-        }
-
-        .negocio-count {
-            background: #d9f0e8;
-            padding: 0.25rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1b6e54;
-        }
-
-        .negocios-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.25rem;
-            padding: 1.8rem;
-        }
-
-        /* Tarjeta de negocio */
-        .negocio-item {
-            background: #ffffff;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            transition: all 0.25s ease;
-            border: 1px solid #edf2f7;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-        }
-
-        .negocio-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
-            border-color: #cbdde9;
-        }
-
-        .negocio-nombre {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #0f2b3d;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .negocio-desc {
-            color: #4b5e77;
-            font-size: 0.9rem;
-            line-height: 1.45;
-            margin: 0.65rem 0;
-        }
-
-        .contact-info {
-            margin-top: 0.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            font-size: 0.85rem;
-            border-top: 1px solid #eef2f8;
-            padding-top: 0.8rem;
-        }
-
-        .contact-info a, .contact-info span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #2c6e5c;
-            text-decoration: none;
-            background: #f6fafd;
-            padding: 0.25rem 0.7rem;
-            border-radius: 30px;
-            transition: all 0.15s;
-            font-weight: 500;
-        }
-
-        .contact-info a:hover {
-            background: #e0f0ea;
-            color: #0f513b;
-        }
-
-        .contact-info i {
-            width: 1rem;
-            font-size: 0.8rem;
-        }
-
-        .badge-provincia {
-            display: none; /* ya tenemos sección por provincia */
-        }
-
-        .empty-message {
-            padding: 2rem;
-            text-align: center;
-            color: #5f7f9e;
-            font-style: italic;
-            background: #fafcff;
-            border-radius: 1.5rem;
-            grid-column: 1 / -1;
-        }
-
-        footer {
-            margin-top: 3.5rem;
-            text-align: center;
-            color: #6c86a3;
-            font-size: 0.85rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 2rem;
-        }
-
-        @media (max-width: 680px) {
-            body {
-                padding: 1.2rem;
-            }
-            .provincia-header h2 {
-                font-size: 1.4rem;
-            }
-            .negocios-list {
-                padding: 1rem;
-                gap: 1rem;
-                grid-template-columns: 1fr;
-            }
-            .search-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .reset-btn {
-                justify-content: center;
-            }
-        }
-
-        .no-results {
-            background: white;
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #2c3e50;
-        }
+        .no-results { text-align: center; padding: 40px; color: #94A3B8; display: none; }
+        
+        @keyframes fade { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
     </style>
 </head>
 <body>
-<div class="container">
     <div class="hero">
-        <h1>
-            <i class="fas fa-store"></i> 
-            Directorio de Negocios en Cuba
-        </h1>
-        <p>Encuentra los mejores emprendimientos, restaurantes, casas particulares y servicios, organizados por provincia.</p>
+        <h1><i class="fas fa-store"></i> Directorio de Negocios en Cuba</h1>
+        <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Buscar por nombre o provincia..."></div>
     </div>
-
-    <div class="search-section">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Buscar por nombre, descripción o provincia..." autocomplete="off">
-        </div>
-        <button class="reset-btn" id="resetBtn"><i class="fas fa-undo-alt"></i> Reiniciar</button>
-        <div class="result-stats" id="resultStats">Mostrando todos los negocios</div>
-    </div>
-
-    <div id="directorioContainer" class="provinces-grid">
-        <!-- Las provincias se inyectarán dinámicamente con JS -->
-        <div class="no-results" style="display: none;">Cargando directorio...</div>
-    </div>
-
-    <footer>
-        <p><i class="fas fa-egg"></i> Apoya el comercio local cubano · Directorio actualizable · Edita el array "negociosDB" en el código fuente</p>
-        <p style="margin-top: 6px;">🇨🇺 Listado ordenado por provincias (oeste a este)</p>
-    </footer>
-</div>
-
-<script>
-    // --------------------------------------------------------------
-    //  BASE DE DATOS DE NEGOCIOS (EDITABLE)
-    //  AÑADE, MODIFICA O ELIMINA OBJETOS SEGÚN TUS NEGOCIOS REALES
-    // --------------------------------------------------------------
-    const negociosDB = [
-        // Pinar del Río
-        { id: 1, nombre: "Café Vueltabajo", provincia: "Pinar del Río", descripcion: "Cafetería especializada en café cubano de la zona, postres y ambiente campestre.", telefono: "+53 48 123456", web: "instagram.com/cafevueltabajo", direccion: "Centro, Viñales" },
-        { id: 2, nombre: "Finca El Paraíso", provincia: "Pinar del Río", descripcion: "Agroturismo, paseos a caballo y degustación de tabaco orgánico.", telefono: "+53 48 789012", web: "", direccion: "Ruta 5, km 12" },
-        // Artemisa
-        { id: 3, nombre: "Mieles de Artemisa", provincia: "Artemisa", descripcion: "Venta de miel natural, propóleo y productos apícolas. Envíos a todo el país.", telefono: "+53 47 556677", web: "mielesartemisa.sld.cu", direccion: "Calle Martí #45" },
-        // La Habana
-        { id: 4, nombre: "Restaurante La Guarida", provincia: "La Habana", descripcion: "Tradicional cocina criolla y fusión en un entorno único del Centro Habana.", telefono: "+53 7 8624940", web: "laguarida.com", direccion: "Concordia #418" },
-        { id: 5, nombre: "Casa Particular Habana Vieja", provincia: "La Habana", descripcion: "Alojamiento con desayuno, vistas al malecón y guía turística.", telefono: "+53 5 3298765", web: "", direccion: "Oficios #162 e/ Obispo" },
-        { id: 6, nombre: "Estudio Cerámica Cuba", provincia: "La Habana", descripcion: "Taller y venta de cerámica artesanal, clases y piezas personalizadas.", telefono: "+53 7 8331122", web: "ceramicacuba.com", direccion: "Vedado, Calle 23" },
-        // Mayabeque
-        { id: 7, nombre: "Dulcería Mayabe", provincia: "Mayabeque", descripcion: "Dulces típicos, postres y repostería fina. Pedidos para eventos.", telefono: "+53 47 224488", web: "", direccion: "San José de las Lajas" },
-        // Matanzas
-        { id: 8, nombre: "Rutas del Puente", provincia: "Matanzas", descripcion: "Servicios de transporte turístico y excursiones al Valle de Yumurí.", telefono: "+53 45 667788", web: "rutasdelpuente.com", direccion: "Plaza de la Vigía" },
-        { id: 9, nombre: "Cubatax Varadero", provincia: "Matanzas", descripcion: "Artesanías y productos cubanos de alta calidad en Varadero.", telefono: "+53 45 443322", web: "", direccion: "Autopista Sur, Local 9" },
-        // Villa Clara
-        { id: 10, nombre: "Hostal Los Laureles", provincia: "Villa Clara", descripcion: "Hostal familiar en Santa Clara, a 5 min del centro histórico.", telefono: "+53 42 201234", web: "", direccion: "Calle Independencia #101" },
-        { id: 11, nombre: "Sabor Cubano Ranchón", provincia: "Villa Clara", descripcion: "Comida campesina, música en vivo y bailes tradicionales.", telefono: "+53 42 556677", web: "saborcubanovc.com", direccion: "Carretera a Manicaragua" },
-        // Cienfuegos
-        { id: 12, nombre: "Perla del Sur Bici Tour", provincia: "Cienfuegos", descripcion: "Alquiler de bicicletas y recorridos guiados por la bahía.", telefono: "+53 43 554433", web: "", direccion: "Paseo del Prado #67" },
-        // Sancti Spíritus
-        { id: 13, nombre: "Artesanías Yayabo", provincia: "Sancti Spíritus", descripcion: "Tejidos, bordados y textiles típicos de la región.", telefono: "+53 41 987654", web: "", direccion: "Calle Honorato #12" },
-        // Ciego de Ávila
-        { id: 14, nombre: "Morón Aventura", provincia: "Ciego de Ávila", descripcion: "Kayak, pesca deportiva y excursiones a Cayo Coco.", telefono: "+53 33 221144", web: "moronaventura.com", direccion: "Carretera a Cayo Coco km 8" },
-        // Camagüey
-        { id: 15, nombre: "Terreña Cocina", provincia: "Camagüey", descripcion: "Restaurante de autor con ingredientes locales y recetas familiares.", telefono: "+53 32 567890", web: "", direccion: "Plaza San Juan de Dios" },
-        // Las Tunas
-        { id: 16, nombre: "Rincón Tunero", provincia: "Las Tunas", descripcion: "Cafetería y juegos tradicionales, punto de encuentro cultural.", telefono: "+53 31 789123", web: "", direccion: "Avenida de la Libertad" },
-        // Holguín
-        { id: 17, nombre: "Bariay Tours", provincia: "Holguín", descripcion: "Expediciones a playa Esmeralda y parque natural Bahía de Naranjo.", telefono: "+53 24 556677", web: "bariaytours.com", direccion: "Centro de Holguín" },
-        // Granma
-        { id: 18, nombre: "Café Bayames", provincia: "Granma", descripcion: "Café orgánico, productos de la tierra y degustaciones.", telefono: "+53 23 445566", web: "", direccion: "Bayamo, Calle Maceo" },
-        // Santiago de Cuba
-        { id: 19, nombre: "Soneros de la Trova", provincia: "Santiago de Cuba", descripcion: "Bar musical con shows en vivo y gastronomía santiaguera.", telefono: "+53 22 567123", web: "", direccion: "Calle Heredia #121" },
-        { id: 20, nombre: "Artesanías El Tivoli", provincia: "Santiago de Cuba", descripcion: "Productos de cuero, madera y pintura naif.", telefono: "+53 22 777888", web: "eltivoli.com", direccion: "Escalineta Padre Pico" },
-        // Guantánamo
-        { id: 21, nombre: "Guantánamo Ecotur", provincia: "Guantánamo", descripcion: "Senderismo y avistamiento de aves en el Yunque de Baracoa.", telefono: "+53 21 334455", web: "", direccion: "Baracoa, Calle Maceo" },
-        // Isla de la Juventud
-        { id: 22, nombre: "Cueva Diver", provincia: "Isla de la Juventud", descripcion: "Buceo en cuevas y excursiones a Punta Francés.", telefono: "+53 46 998877", web: "cuevadiver.com", direccion: "Nueva Gerona, Club de Buceo" }
-    ];
-
-    // ORDEN DE PROVINCIAS (de oeste a este, incluyendo Isla de la Juventud al final)
-    const ordenProvincias = [
-        "Pinar del Río", "Artemisa", "La Habana", "Mayabeque", "Matanzas",
-        "Cienfuegos", "Villa Clara", "Sancti Spíritus", "Ciego de Ávila",
-        "Camagüey", "Las Tunas", "Holguín", "Granma", "Santiago de Cuba",
-        "Guantánamo", "Isla de la Juventud"
-    ];
-
-    // Función para agrupar negocios por provincia respetando orden
-    function agruparPorProvincia(negocios) {
-        const mapa = new Map();
-        for (const neg of negocios) {
-            if (!mapa.has(neg.provincia)) mapa.set(neg.provincia, []);
-            mapa.get(neg.provincia).push(neg);
-        }
-        // ordenar según ordenProvincias, solo mostrar provincias que tengan al menos un negocio después del filtro
-        const provinciasOrdenadas = ordenProvincias.filter(prov => mapa.has(prov));
-        return provinciasOrdenadas.map(prov => ({ provincia: prov, negocios: mapa.get(prov) }));
-    }
-
-    // Renderizado completo: recibe array de negocios (filtrados)
-    function renderizar(negociosFiltrados) {
-        const container = document.getElementById('directorioContainer');
-        if (!container) return;
-
-        if (negociosFiltrados.length === 0) {
-            container.innerHTML = `<div class="no-results" style="display:block;">
-                                        <i class="fas fa-search-minus" style="font-size: 2rem; opacity: 0.5;"></i>
-                                        <h3>No se encontraron negocios</h3>
-                                        <p>Intenta con otra palabra o <strong>reinicia la búsqueda</strong></p>
-                                    </div>`;
-            document.getElementById('resultStats').innerText = `0 resultados`;
-            return;
-        }
-
-        const agrupado = agruparPorProvincia(negociosFiltrados);
-        let totalNegocios = 0;
-        let html = '';
-
-        for (const grupo of agrupado) {
-            const { provincia, negocios } = grupo;
-            totalNegocios += negocios.length;
-            const countClass = negocios.length === 1 ? 'negocio-count' : 'negocio-count';
-            html += `
-                <div class="provincia-card">
-                    <div class="provincia-header">
-                        <h2><i class="fas fa-map-marker-alt"></i> ${provincia}</h2>
-                        <div class="${countClass}">${negocios.length} ${negocios.length === 1 ? 'negocio' : 'negocios'}</div>
+    <div class="container" id="mainContainer">
+        
+                    <section class="province-block">
+                        <div class="province-title">
+                            <h2><i class="fas fa-map-marker-alt"></i> Santiago de Cuba</h2>
+                            <span class="count">1</span>
+                        </div>
+                        <div class="biz-grid">
+                    <div class="biz-card">
+                        <div class="biz-header">
+                            <div class="biz-title">TechSolutions</div>
+                            <div class="biz-prov">Santiago de Cuba</div>
+                        </div>
+                        <div class="biz-body">
+                            <p class="biz-desc">Impresión, fotocopias y escaneo de documentos.</p>
+                            <div class="biz-meta">
+                                <div class="meta-item"><i class="fas fa-phone"></i> <a href="tel:58250828">58250828</a></div>
+                                <div class="meta-item"><i class="fas fa-globe"></i> <a href="https://techsolutionscuba.github.io" target="_blank">https://techsolutionscuba.github.io</a></div>
+                                <div class="meta-item"><i class="fas fa-map-pin"></i> <span>Bloque 5 #43 Plan Novoa Micro 8</span></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="negocios-list">
-            `;
-            for (const neg of negocios) {
-                // Mostrar teléfono, web y dirección si existen (al menos un campo)
-                const telefonoHtml = neg.telefono ? `<a href="tel:${neg.telefono.replace(/\s/g, '')}"><i class="fas fa-phone-alt"></i> ${neg.telefono}</a>` : '';
-                const webHtml = neg.web ? (neg.web.includes('http') ? `<a href="${neg.web}" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> Web</a>` : `<a href="https://${neg.web}" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> ${neg.web}</a>`) : '';
-                const direccionHtml = neg.direccion ? `<span><i class="fas fa-location-dot"></i> ${neg.direccion}</span>` : '';
+                </div>
+                    </section>
                 
-                html += `
-                    <div class="negocio-item">
-                        <div class="negocio-nombre">
-                            <span>${escapeHtml(neg.nombre)}</span>
-                        </div>
-                        <div class="negocio-desc">${escapeHtml(neg.descripcion)}</div>
-                        <div class="contact-info">
-                            ${telefonoHtml}
-                            ${webHtml}
-                            ${direccionHtml}
-                        </div>
-                    </div>
-                `;
-            }
-            html += `</div></div>`;
-        }
+    </div>
+    <div id="noResults" class="no-results"><h3>No se encontraron resultados</h3></div>
 
-        container.innerHTML = html;
-        // actualizar contador de resultados
-        const statsSpan = document.getElementById('resultStats');
-        if (statsSpan) {
-            const palabraClave = document.getElementById('searchInput').value.trim();
-            if (palabraClave === '') {
-                statsSpan.innerText = `Total: ${totalNegocios} negocios en ${agrupado.length} provincias`;
-            } else {
-                statsSpan.innerHTML = `<i class="fas fa-filter"></i> ${totalNegocios} resultados para "${escapeHtml(palabraClave)}"`;
-            }
-        }
-    }
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const container = document.getElementById('mainContainer');
+        const noResults = document.getElementById('noResults');
+        
+        searchInput.addEventListener('input', function() {
+            const term = this.value.toLowerCase().trim();
+            const blocks = document.querySelectorAll('.province-block');
+            let visibleCount = 0;
 
-    // Utilidad para evitar XSS
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-            return c;
+            blocks.forEach(block => {
+                const cards = block.querySelectorAll('.biz-card');
+                let hasVisibleCards = false;
+
+                cards.forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    const match = text.includes(term);
+                    card.style.display = match ? 'block' : 'none';
+                    if (match) hasVisibleCards = true;
+                });
+
+                block.style.display = hasVisibleCards ? 'block' : 'none';
+                if (hasVisibleCards) visibleCount++;
+            });
+
+            noResults.style.display = (visibleCount === 0 && term !== '') ? 'block' : 'none';
         });
-    }
-
-    // Lógica de filtrado (por nombre, descripción o provincia)
-    function filtrarNegocios(texto, negociosOriginal) {
-        if (!texto.trim()) return [...negociosOriginal];
-        const busqueda = texto.trim().toLowerCase();
-        return negociosOriginal.filter(neg => {
-            return neg.nombre.toLowerCase().includes(busqueda) ||
-                   neg.descripcion.toLowerCase().includes(busqueda) ||
-                   neg.provincia.toLowerCase().includes(busqueda) ||
-                   (neg.direccion && neg.direccion.toLowerCase().includes(busqueda)) ||
-                   (neg.telefono && neg.telefono.includes(busqueda));
-        });
-    }
-
-    // Estado y controladores
-    let currentFilter = '';
-    let negociosMaster = [...negociosDB];  // copia
-
-    function actualizarDirectorio() {
-        const filtrados = filtrarNegocios(currentFilter, negociosMaster);
-        renderizar(filtrados);
-    }
-
-    // Eventos del buscador
-    const searchInput = document.getElementById('searchInput');
-    const resetBtn = document.getElementById('resetBtn');
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            currentFilter = e.target.value;
-            actualizarDirectorio();
-        });
-    }
-    if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-            if (searchInput) searchInput.value = '';
-            currentFilter = '';
-            actualizarDirectorio();
-            // focus opcional
-            searchInput.focus();
-        });
-    }
-
-    // inicialización
-    renderizar(negociosMaster);
-    // estadísticas iniciales
-    document.getElementById('resultStats').innerText = `Total: ${negociosMaster.length} negocios en diversas provincias`;
-
-    // Si se quiere agregar un pequeño mensaje en consola para facilitar edición
-    console.log("📋 Directorio de Negocios Cuba | Modifica el array 'negociosDB' para personalizar tus emprendimientos.");
-</script>
+    </script>
 </body>
 </html>
