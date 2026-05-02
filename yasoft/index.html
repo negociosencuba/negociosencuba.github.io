@@ -6,120 +6,215 @@
   <title>YASOFT | Soluciones Seguras</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Inter', sans-serif; }
-    body { background: #f8fafc; }
-    .card-hover:hover { transform: translateY(-5px); transition: all 0.2s ease; box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
+    body { background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%); min-height: 100vh; }
+    .wave-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      pointer-events: none;
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.2);
+    }
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #128C7E, #075E54);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #0284c7, #0f766e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased relative">
 
-<!-- HEADER -->
-<header class="bg-white shadow-md sticky top-0 z-30">
-  <div class="container mx-auto px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+<!-- Header con logo tipográfico -->
+<header class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-green-100">
+  <div class="container mx-auto px-5 py-3 flex flex-wrap justify-between items-center gap-3">
     <div class="flex items-center gap-3">
-      <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md"><i class="fas fa-shield-alt text-2xl"></i></div>
-      <div><h1 class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-800 to-indigo-700">YASOFT</h1><p class="text-xs font-medium text-gray-500 -mt-1">SOLUCIONES SEGURAS</p></div>
+      <div class="bg-gradient-to-br from-sky-500 to-green-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-md">
+        <i class="fas fa-shield-alt text-2xl"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">
+          <span class="gradient-text">YASOFT</span>
+        </h1>
+        <p class="text-xs font-semibold text-gray-500 -mt-1 flex items-center gap-1">
+          <i class="fas fa-check-circle text-green-500 text-xs"></i> SOLUCIONES SEGURAS
+        </p>
+      </div>
     </div>
     <div class="flex flex-wrap items-center gap-4 text-sm">
-      <div class="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-full"><i class="fas fa-phone-alt text-blue-600"></i><a href="tel:+5353955850" class="font-semibold text-gray-800 hover:text-blue-700">+53 5395 5850</a></div>
-      <a href="https://wa.me/5353955850?text=Hola%20YASOFT%2C%20necesito%20informaci%C3%B3n" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition shadow-sm"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+      <div class="flex items-center gap-2 bg-sky-50 px-3 py-2 rounded-full shadow-sm border border-sky-100">
+        <i class="fas fa-phone-alt text-sky-600"></i>
+        <a href="tel:+5353955850" class="font-semibold text-gray-800 hover:text-sky-700 transition">+53 5395 5850</a>
+      </div>
+      <a href="https://wa.me/5353955850?text=Hola%20YASOFT%2C%20necesito%20informaci%C3%B3n" target="_blank" class="btn-whatsapp text-white px-5 py-2 rounded-full flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
+        <i class="fab fa-whatsapp text-lg"></i> WhatsApp
+      </a>
     </div>
   </div>
 </header>
 
-<!-- SLOGAN -->
-<section class="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
-  <div class="container mx-auto px-5 py-8 text-center">
-    <p class="text-lg md:text-xl font-medium text-gray-700">🔐 TU TECNOLOGÍA EN MANOS PROFESIONALES</p>
-    <p class="text-sm text-gray-500">Soluciones integrales con calidad y garantía</p>
+<!-- Slogan con degradado cielo-verde -->
+<section class="bg-gradient-to-r from-sky-400 to-green-400 text-white relative overflow-hidden">
+  <div class="container mx-auto px-5 py-12 text-center relative z-10">
+    <p class="text-2xl md:text-3xl font-bold drop-shadow-md">🔐 TU TECNOLOGÍA EN MANOS PROFESIONALES</p>
+    <p class="text-sky-50 text-lg font-medium mt-2">Soluciones integrales con calidad y garantía</p>
+    <div class="flex justify-center gap-4 mt-4">
+      <span class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm"><i class="fas fa-clock mr-1"></i> Respuesta inmediata</span>
+      <span class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm"><i class="fas fa-star mr-1"></i> Confianza total</span>
+    </div>
+  </div>
+  <div class="wave-bg">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" opacity="0.6"></path>
+    </svg>
   </div>
 </section>
 
-<!-- SERVICIOS (Se renderiza con JS ofuscado) -->
-<main class="container mx-auto px-5 py-12">
-  <div class="mb-8 text-center md:text-left">
-    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center justify-center md:justify-start gap-2"><i class="fas fa-cogs text-blue-600"></i> Nuestros Servicios</h2>
-    <p class="text-gray-500 mt-1">Especialistas en tecnología y seguridad</p>
+<!-- Grid de servicios -->
+<main class="container mx-auto px-5 py-16 relative z-10">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 inline-block bg-white/50 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm">
+      <i class="fas fa-cogs text-sky-500 mr-2"></i> Nuestros Servicios
+    </h2>
+    <p class="text-gray-700 mt-3 max-w-2xl mx-auto">Especialistas en tecnología, seguridad y conectividad</p>
   </div>
   <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <!-- Loader -->
-    <div class="col-span-full flex justify-center py-12"><div class="animate-pulse flex space-x-2"><div class="w-3 h-3 bg-blue-400 rounded-full"></div><div class="w-3 h-3 bg-blue-400 rounded-full"></div><div class="w-3 h-3 bg-blue-400 rounded-full"></div><span class="text-gray-500 ml-2">Cargando servicios...</span></div></div>
+    <div class="col-span-full flex justify-center py-12">
+      <div class="flex space-x-2"><div class="w-4 h-4 bg-sky-400 rounded-full animate-bounce"></div><div class="w-4 h-4 bg-green-400 rounded-full animate-bounce delay-75"></div><div class="w-4 h-4 bg-sky-400 rounded-full animate-bounce delay-150"></div><span class="ml-2 text-gray-600">Cargando servicios...</span></div>
+    </div>
   </div>
 </main>
 
-<!-- CONTACTO Y DIRECCIÓN -->
-<section class="bg-white border-t border-gray-200 py-12">
+<!-- Sección de contacto -->
+<section class="bg-white/70 backdrop-blur-sm border-y border-green-100 py-16 mt-8">
   <div class="container mx-auto px-5">
-    <div class="flex flex-col md:flex-row justify-between gap-8">
-      <div><h3 class="text-xl font-bold mb-3 flex gap-2"><i class="fas fa-map-marker-alt text-red-500"></i>Dirección</h3><p class="text-gray-600">BLOQUE L, Esc.28, Apto 6, 3er Piso. Distrito José Martí</p><div class="mt-4 flex flex-wrap gap-4"><div class="flex items-center gap-2"><i class="fab fa-facebook-square text-blue-700 text-xl"></i><span>fb: Yasoft Soluciones Seguras</span></div><div class="flex items-center gap-2"><i class="fas fa-envelope text-gray-500"></i><span>yoancoello38@gmail.com</span></div></div></div>
-      <div><h3 class="text-xl font-bold mb-3 flex gap-2"><i class="fas fa-headset"></i>Atención inmediata</h3><p class="text-gray-600 flex gap-2"><i class="fas fa-phone-alt text-green-600"></i><span>+53 5395 5850</span></p><a href="https://wa.me/5353955850?text=Necesito%20presupuesto" target="_blank" class="inline-flex mt-3 bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-full gap-2 font-medium"><i class="fab fa-whatsapp text-lg"></i>Chatea con nosotros</a></div>
-      <div><h3 class="text-xl font-bold mb-3"><i class="fas fa-chart-line"></i> Profesionalismo</h3><p class="text-gray-600">✔ Soporte técnico certificado<br>✔ Respuesta rápida<br>✔ Garantía en todos los trabajos</p></div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl shadow-md p-6 border-l-8 border-sky-400 hover:shadow-xl transition">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-sky-100 p-3 rounded-full"><i class="fas fa-map-marker-alt text-sky-600 text-xl"></i></div>
+          <h3 class="text-xl font-bold text-gray-800">Dirección</h3>
+        </div>
+        <p class="text-gray-600">BLOQUE L, Esc.28, Apto 6, 3er Piso. Distrito José Martí</p>
+        <div class="mt-4 flex flex-wrap gap-3 text-sm">
+          <div class="flex items-center gap-2"><i class="fab fa-facebook-square text-blue-600 text-lg"></i><span class="text-gray-700">Yasoft Soluciones Seguras</span></div>
+          <div class="flex items-center gap-2"><i class="fas fa-envelope text-gray-500"></i><span class="text-gray-700">yoancoello38@gmail.com</span></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md p-6 border-l-8 border-green-400 hover:shadow-xl transition">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-green-100 p-3 rounded-full"><i class="fas fa-headset text-green-600 text-xl"></i></div>
+          <h3 class="text-xl font-bold text-gray-800">Atención inmediata</h3>
+        </div>
+        <p class="text-gray-700 flex items-center gap-2"><i class="fas fa-phone-alt text-green-500"></i> +53 5395 5850</p>
+        <a href="https://wa.me/5353955850?text=Necesito%20presupuesto" target="_blank" class="inline-flex mt-4 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full gap-2 font-medium transition shadow-md">
+          <i class="fab fa-whatsapp text-lg"></i> Chatea con nosotros
+        </a>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md p-6 border-l-8 border-sky-400 hover:shadow-xl transition">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-sky-100 p-3 rounded-full"><i class="fas fa-chart-line text-sky-600 text-xl"></i></div>
+          <h3 class="text-xl font-bold text-gray-800">Profesionalismo</h3>
+        </div>
+        <ul class="text-gray-600 space-y-2">
+          <li class="flex gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i> Soporte técnico certificado</li>
+          <li class="flex gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i> Respuesta rápida (menos de 15 min)</li>
+          <li class="flex gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i> Garantía en todos los trabajos</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="bg-gray-900 text-white py-6 text-center text-sm"><p>© 2026 YASOFT - Soluciones Seguras. Todos los derechos reservados.</p><p class="text-gray-400 text-xs mt-1">Tecnología de confianza</p></footer>
+<footer class="bg-gradient-to-r from-sky-900 to-green-900 text-white py-8 text-center">
+  <p class="text-sm">© 2026 YASOFT - Soluciones Seguras. Todos los derechos reservados.</p>
+  <p class="text-sky-200 text-xs mt-2"><i class="fas fa-shield-alt"></i> Tecnología de confianza</p>
+</footer>
 
-<!-- JavaScript OFUSCADO (sin precios, con imágenes y tildes corregidas) -->
+<!-- JavaScript con ofuscación simple (variables renombradas, código compacto) y textos corregidos -->
 <script>
 (function(){
-  // Lista de servicios ampliada: incluye los 6 originales + 3 nuevos servicios
-  // - Reparación de memorias USB
-  // - Instalación de alarmas
-  // - Ventas de Router 4G USB
-  const servicios = [
-    { id:0, titulo:"Reparación y Mantenimiento de Computadoras", descripcion:"Actualización, Software, Hardware, Eliminación de Virus.", icono:"fas fa-laptop-code" },
-    { id:1, titulo:"Reparación de Celulares (Smartphones)", descripcion:"Pantallas, Baterías, Puertos de Carga, Micro-electrónica.", icono:"fas fa-mobile-alt" },
-    { id:2, titulo:"Montaje de Redes Informáticas", descripcion:"Cableado Estructurado, Wi-Fi, Redes Locales (LAN), Conectividad.", icono:"fas fa-network-wired" },
-    { id:3, titulo:"Virtualización de Servidores", descripcion:"Optimización de Recursos, Nube, Servidores Locales y Remotos.", icono:"fas fa-server" },
-    { id:4, titulo:"Instalación y Mantenimiento de Cámaras de Seguridad", descripcion:"Vigilancia, Monitoreo Remoto, Sistemas de Alarma, Protección de Negocios.", icono:"fas fa-video" },
-    { id:5, titulo:"Diseño Gráfico y Publicidad", descripcion:"Pósteres, Tarjetas de Presentación, Vallas, Branding.", icono:"fas fa-palette" },
-    // === NUEVOS SERVICIOS AGREGADOS (REPARACIÓN USB, ALARMAS, ROUTER 4G) ===
-    { id:6, titulo:"Reparación de Memorias USB", descripcion:"Recuperación de datos, Formateo, Cambio de conectores y Diagnóstico.", icono:"fas fa-memory" },
-    { id:7, titulo:"Instalación de Alarmas", descripcion:"Sensores perimetrales, Centrales, Sirenas y Monitoreo profesional.", icono:"fas fa-bell" },
-    { id:8, titulo:"Ventas de Router 4G USB", descripcion:"Dispositivos portátiles 4G, Conexión móvil, Configuración incluida y asesoría.", icono:"fas fa-wifi" }
+  // Lista de servicios con ortografía y redacción corregidas (acentos y claridad)
+  const a = [
+    { t:"Reparación y Mantenimiento de Computadoras", d:"Actualización, software, hardware, eliminación de virus.", i:"fas fa-laptop-code" },
+    { t:"Reparación de Celulares (Smartphones)", d:"Pantallas, baterías, puertos de carga, microelectrónica.", i:"fas fa-mobile-alt" },
+    { t:"Montaje de Redes Informáticas", d:"Cableado estructurado, Wi-Fi, redes locales (LAN), conectividad.", i:"fas fa-network-wired" },
+    { t:"Virtualización de Servidores", d:"Optimización de recursos, nube, servidores locales y remotos.", i:"fas fa-server" },
+    { t:"Instalación y Mantenimiento de Cámaras de Seguridad", d:"Vigilancia, monitoreo remoto, sistemas de alarma, protección de negocios.", i:"fas fa-video" },
+    { t:"Diseño Gráfico y Publicidad", d:"Pósteres, tarjetas de presentación, vallas, branding.", i:"fas fa-palette" },
+    { t:"Reparación de Memorias USB", d:"Recuperación de datos, formateo, cambio de conectores y diagnóstico.", i:"fas fa-memory" },
+    { t:"Instalación de Alarmas", d:"Sensores perimetrales, centrales, sirenas y monitoreo profesional.", i:"fas fa-bell" },
+    { t:"Ventas de Router 4G USB", d:"Dispositivos portátiles 4G, conexión móvil, configuración incluida y asesoría.", i:"fas fa-wifi" }
   ];
-  const contenedor = document.getElementById("servicesGrid");
-  function render() {
-    if(!contenedor) return;
-    let html = "";
-    for(let s of servicios) {
-      html += `<div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover transition flex flex-col h-full">
-        <div class="p-5 pb-2 flex justify-center text-5xl text-blue-600">
-          <i class="${s.icono}"></i>
-        </div>
-        <div class="px-5 pt-2 pb-3 text-center">
-          <h3 class="text-xl font-bold text-gray-800">${s.titulo}</h3>
-          <div class="w-12 h-1 bg-blue-500 mx-auto my-3 rounded-full"></div>
-          <p class="text-gray-600 text-sm leading-relaxed">${s.descripcion}</p>
-        </div>
-        <div class="px-5 pb-5 mt-auto">
-          <a href="https://wa.me/5353955850?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(s.titulo)}" target="_blank" class="block w-full text-center bg-green-50 hover:bg-green-100 text-green-700 font-medium py-2 rounded-xl transition text-sm border border-green-200">
-            <i class="fab fa-whatsapp mr-1"></i> Consultar por WhatsApp
-          </a>
-        </div>
-      </div>`;
+  const b = document.getElementById("servicesGrid");
+  function c(){
+    if(!b) return;
+    let d = "";
+    for(let e of a){
+      d += '<div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-green-100 card-hover transition-all duration-300 flex flex-col h-full group">' +
+        '<div class="p-6 pb-3 flex justify-center text-5xl text-sky-500 group-hover:text-green-500 transition-colors">' +
+        '<i class="' + e.i + '"></i>' +
+        '</div>' +
+        '<div class="px-5 pb-4 text-center">' +
+        '<h3 class="text-xl font-extrabold text-gray-800">' + e.t + '</h3>' +
+        '<div class="w-16 h-1 bg-gradient-to-r from-sky-400 to-green-400 mx-auto my-3 rounded-full"></div>' +
+        '<p class="text-gray-600 text-sm leading-relaxed">' + e.d + '</p>' +
+        '</div>' +
+        '<div class="px-5 pb-6 mt-auto">' +
+        '<a href="https://wa.me/5353955850?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20' + encodeURIComponent(e.t) + '" target="_blank" class="block w-full text-center bg-gradient-to-r from-green-50 to-sky-50 hover:from-green-100 hover:to-sky-100 text-green-700 font-semibold py-2.5 rounded-xl transition text-sm border border-green-200 shadow-sm">' +
+        '<i class="fab fa-whatsapp mr-2"></i> Consultar por WhatsApp' +
+        '</a>' +
+        '</div>' +
+        '</div>';
     }
-    contenedor.innerHTML = html;
+    b.innerHTML = d;
   }
-  render();
-
-  // Botón flotante de WhatsApp (opcional) - se mantiene igual
-  let waFloat = document.createElement('a');
-  waFloat.href = "https://wa.me/5353955850?text=Hola%20YASOFT!%20Necesito%20ayuda";
-  waFloat.target = "_blank";
-  waFloat.className = "fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg z-40 flex items-center justify-center gap-2 group";
-  waFloat.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i><span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-sm font-medium ml-0 group-hover:ml-2">Contáctanos</span>';
-  document.body.appendChild(waFloat);
+  c();
+  // Botón flotante ofuscado
+  let f = document.createElement('a');
+  f.href = "https://wa.me/5353955850?text=Hola%20YASOFT!%20Me%20interesa%20un%20servicio";
+  f.target = "_blank";
+  f.className = "fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-full p-4 shadow-xl z-40 flex items-center justify-center gap-2 group transition-all duration-300 hover:scale-105";
+  f.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i><span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-sm font-medium ml-0 group-hover:ml-2">¡Escríbenos!</span>';
+  document.body.appendChild(f);
 })();
 </script>
 
-<!-- Estilo adicional para animación suave -->
+<!-- Animaciones de entrada -->
 <style>
-  @keyframes fadeInUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-  .card-hover { animation: fadeInUp 0.4s ease-out; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card-hover {
+    animation: fadeUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  .card-hover:nth-child(1) { animation-delay: 0.05s; }
+  .card-hover:nth-child(2) { animation-delay: 0.1s; }
+  .card-hover:nth-child(3) { animation-delay: 0.15s; }
+  .card-hover:nth-child(4) { animation-delay: 0.2s; }
+  .card-hover:nth-child(5) { animation-delay: 0.25s; }
+  .card-hover:nth-child(6) { animation-delay: 0.3s; }
+  .card-hover:nth-child(7) { animation-delay: 0.35s; }
+  .card-hover:nth-child(8) { animation-delay: 0.4s; }
+  .card-hover:nth-child(9) { animation-delay: 0.45s; }
 </style>
 </body>
 </html>
