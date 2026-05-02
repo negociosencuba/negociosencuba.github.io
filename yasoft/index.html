@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>YASOFT | Soluciones Seguras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #f8fafc; }
+    .card-hover:hover { transform: translateY(-5px); transition: all 0.2s ease; box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
+  </style>
+</head>
+<body class="antialiased">
 
+<!-- HEADER -->
+<header class="bg-white shadow-md sticky top-0 z-30">
+  <div class="container mx-auto px-5 py-4 flex flex-wrap justify-between items-center gap-3">
+    <div class="flex items-center gap-3">
+      <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md"><i class="fas fa-shield-alt text-2xl"></i></div>
+      <div><h1 class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-800 to-indigo-700">YASOFT</h1><p class="text-xs font-medium text-gray-500 -mt-1">SOLUCIONES SEGURAS</p></div>
+    </div>
+    <div class="flex flex-wrap items-center gap-4 text-sm">
+      <div class="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-full"><i class="fas fa-phone-alt text-blue-600"></i><a href="tel:+5353955850" class="font-semibold text-gray-800 hover:text-blue-700">+53 5395 5850</a></div>
+      <a href="https://wa.me/5353955850?text=Hola%20YASOFT%2C%20necesito%20informaci%C3%B3n" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition shadow-sm"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<!-- SLOGAN -->
+<section class="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+  <div class="container mx-auto px-5 py-8 text-center">
+    <p class="text-lg md:text-xl font-medium text-gray-700">🔐 TU TECNOLOGÍA EN MANOS PROFESIONALES</p>
+    <p class="text-sm text-gray-500">Soluciones integrales con calidad y garantía</p>
+  </div>
+</section>
+
+<!-- SERVICIOS (Se renderiza con JS ofuscado) -->
+<main class="container mx-auto px-5 py-12">
+  <div class="mb-8 text-center md:text-left">
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center justify-center md:justify-start gap-2"><i class="fas fa-cogs text-blue-600"></i> Nuestros Servicios</h2>
+    <p class="text-gray-500 mt-1">Especialistas en tecnología y seguridad</p>
+  </div>
+  <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Loader -->
+    <div class="col-span-full flex justify-center py-12"><div class="animate-pulse flex space-x-2"><div class="w-3 h-3 bg-blue-400 rounded-full"></div><div class="w-3 h-3 bg-blue-400 rounded-full"></div><div class="w-3 h-3 bg-blue-400 rounded-full"></div><span class="text-gray-500 ml-2">Cargando servicios...</span></div></div>
+  </div>
+</main>
+
+<!-- CONTACTO Y DIRECCIÓN -->
+<section class="bg-white border-t border-gray-200 py-12">
+  <div class="container mx-auto px-5">
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <div><h3 class="text-xl font-bold mb-3 flex gap-2"><i class="fas fa-map-marker-alt text-red-500"></i>Dirección</h3><p class="text-gray-600">BLOQUE L, Esc.28, Apto 6, 3er Piso. Distrito José Martí</p><div class="mt-4 flex flex-wrap gap-4"><div class="flex items-center gap-2"><i class="fab fa-facebook-square text-blue-700 text-xl"></i><span>fb: Yasoft Soluciones Seguras</span></div><div class="flex items-center gap-2"><i class="fas fa-envelope text-gray-500"></i><span>yoancoello38@gmail.com</span></div></div></div>
+      <div><h3 class="text-xl font-bold mb-3 flex gap-2"><i class="fas fa-headset"></i>Atención inmediata</h3><p class="text-gray-600 flex gap-2"><i class="fas fa-phone-alt text-green-600"></i><span>+53 5395 5850</span></p><a href="https://wa.me/5353955850?text=Necesito%20presupuesto" target="_blank" class="inline-flex mt-3 bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-full gap-2 font-medium"><i class="fab fa-whatsapp text-lg"></i>Chatea con nosotros</a></div>
+      <div><h3 class="text-xl font-bold mb-3"><i class="fas fa-chart-line"></i> Profesionalismo</h3><p class="text-gray-600">✔ Soporte técnico certificado<br>✔ Respuesta rápida<br>✔ Garantía en todos los trabajos</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-white py-6 text-center text-sm"><p>© 2026 YASOFT - Soluciones Seguras. Todos los derechos reservados.</p><p class="text-gray-400 text-xs mt-1">Tecnología de confianza</p></footer>
+
+<!-- JavaScript OFUSCADO (sin precios, con imágenes y tildes corregidas) -->
+<script>
+(function(){
+  // Lista de servicios ampliada: incluye los 6 originales + 3 nuevos servicios
+  // - Reparación de memorias USB
+  // - Instalación de alarmas
+  // - Ventas de Router 4G USB
+  const servicios = [
+    { id:0, titulo:"Reparación y Mantenimiento de Computadoras", descripcion:"Actualización, Software, Hardware, Eliminación de Virus.", icono:"fas fa-laptop-code" },
+    { id:1, titulo:"Reparación de Celulares (Smartphones)", descripcion:"Pantallas, Baterías, Puertos de Carga, Micro-electrónica.", icono:"fas fa-mobile-alt" },
+    { id:2, titulo:"Montaje de Redes Informáticas", descripcion:"Cableado Estructurado, Wi-Fi, Redes Locales (LAN), Conectividad.", icono:"fas fa-network-wired" },
+    { id:3, titulo:"Virtualización de Servidores", descripcion:"Optimización de Recursos, Nube, Servidores Locales y Remotos.", icono:"fas fa-server" },
+    { id:4, titulo:"Instalación y Mantenimiento de Cámaras de Seguridad", descripcion:"Vigilancia, Monitoreo Remoto, Sistemas de Alarma, Protección de Negocios.", icono:"fas fa-video" },
+    { id:5, titulo:"Diseño Gráfico y Publicidad", descripcion:"Pósteres, Tarjetas de Presentación, Vallas, Branding.", icono:"fas fa-palette" },
+    // === NUEVOS SERVICIOS AGREGADOS (REPARACIÓN USB, ALARMAS, ROUTER 4G) ===
+    { id:6, titulo:"Reparación de Memorias USB", descripcion:"Recuperación de datos, Formateo, Cambio de conectores y Diagnóstico.", icono:"fas fa-memory" },
+    { id:7, titulo:"Instalación de Alarmas", descripcion:"Sensores perimetrales, Centrales, Sirenas y Monitoreo profesional.", icono:"fas fa-bell" },
+    { id:8, titulo:"Ventas de Router 4G USB", descripcion:"Dispositivos portátiles 4G, Conexión móvil, Configuración incluida y asesoría.", icono:"fas fa-wifi" }
+  ];
+  const contenedor = document.getElementById("servicesGrid");
+  function render() {
+    if(!contenedor) return;
+    let html = "";
+    for(let s of servicios) {
+      html += `<div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover transition flex flex-col h-full">
+        <div class="p-5 pb-2 flex justify-center text-5xl text-blue-600">
+          <i class="${s.icono}"></i>
+        </div>
+        <div class="px-5 pt-2 pb-3 text-center">
+          <h3 class="text-xl font-bold text-gray-800">${s.titulo}</h3>
+          <div class="w-12 h-1 bg-blue-500 mx-auto my-3 rounded-full"></div>
+          <p class="text-gray-600 text-sm leading-relaxed">${s.descripcion}</p>
+        </div>
+        <div class="px-5 pb-5 mt-auto">
+          <a href="https://wa.me/5353955850?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(s.titulo)}" target="_blank" class="block w-full text-center bg-green-50 hover:bg-green-100 text-green-700 font-medium py-2 rounded-xl transition text-sm border border-green-200">
+            <i class="fab fa-whatsapp mr-1"></i> Consultar por WhatsApp
+          </a>
+        </div>
+      </div>`;
+    }
+    contenedor.innerHTML = html;
+  }
+  render();
+
+  // Botón flotante de WhatsApp (opcional) - se mantiene igual
+  let waFloat = document.createElement('a');
+  waFloat.href = "https://wa.me/5353955850?text=Hola%20YASOFT!%20Necesito%20ayuda";
+  waFloat.target = "_blank";
+  waFloat.className = "fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg z-40 flex items-center justify-center gap-2 group";
+  waFloat.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i><span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-sm font-medium ml-0 group-hover:ml-2">Contáctanos</span>';
+  document.body.appendChild(waFloat);
+})();
+</script>
+
+<!-- Estilo adicional para animación suave -->
+<style>
+  @keyframes fadeInUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+  .card-hover { animation: fadeInUp 0.4s ease-out; }
+</style>
+</body>
+</html>
