@@ -1,4 +1,4 @@
-²# 🇨🇺 Portal de Negocios Cubanos
+🇨🇺 Portal de Negocios Cubanos
 
 Plataforma web para promocionar y visibilizar pequeños negocios, emprendimientos y servicios locales en Cuba.  
 Este proyecto nace con el objetivo de conectar a la comunidad con el talento y esfuerzo de los emprendedores cubanos, facilitando el descubrimiento de productos y servicios de forma sencilla y accesible.
