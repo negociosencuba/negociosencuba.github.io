@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Panel de Administración</h1>
+        
+        <!-- Login -->
+        <div id="loginSection">
+            <h2>🔐 Acceso al Catálogo</h2>
+            <div class="form-group">
+                <label>Selecciona tu catálogo:</label>
+                <select id="catalogoSelect"></select>
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" id="passwordInput" placeholder="Ingresa tu contraseña" />
+            </div>
+            <button class="btn-primary" onclick="acceder()">Acceder</button>
+            <div id="loginMessage" class="hidden"></div>
+        </div>
+        
+        <!-- Panel de Administración (oculto hasta login) -->
+        <div id="adminSection" class="hidden">
+            <h2>Panel de <span id="catalogoNombre"></span></h2>
+            <div id="adminContent">
+                <!-- Aquí iría el contenido del panel admin -->
+                <p>Bienvenido al panel de administración.</p>
+                <button class="btn-primary" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // ========== CONFIGURACIÓN ==========
+        let catalogos = [];
+        let catalogoActual = null;
+
+        // ========== CARGAR CONFIGURACIÓN ==========
+        async function cargarConfiguracion() {
+            try {
+                const response = await fetch('config.json');
+                const data = await response.json();
+                catalogos = data.catalogos;
+                cargarSelect();
+            } catch (error) {
+                console.error('Error cargando configuración:', error);
+                document.getElementById('loginSection').innerHTML = `
+                    <div class="error">❌ Error cargando la configuración. Verifica que el archivo config.json exista.</div>
+                `;
+            }
+        }
+
+        // ========== CARGAR SELECT ==========
+        function cargarSelect() {
+            const select = document.getElementById('catalogoSelect');
+            select.innerHTML = '';
+            
+            catalogos.forEach(c => {
+                const option = document.createElement('option');
+                option.value = c.id;
+                option.textContent = c.nombre;
+                select.appendChild(option);
+            });
+        }
+
+        // ========== ACCEDER ==========
+        function acceder() {
+            const id = document.getElementById('catalogoSelect').value;
+            const password = document.getElementById('passwordInput').value;
+            const messageDiv = document.getElementById('loginMessage');
+            
+            // Buscar el catálogo
+            catalogoActual = catalogos.find(c => c.id === id);
+            if (!catalogoActual) {
+                mostrarMensaje(messageDiv, 'Catálogo no encontrado', 'error');
+                return;
+            }
+            
+            // Verificar contraseña (usando hash)
+            if (btoa(password) !== catalogoActual.password_hash) {
+                mostrarMensaje(messageDiv, '❌ Contraseña incorrecta', 'error');
+                return;
+            }
+            
+            // Login exitoso
+            mostrarMensaje(messageDiv, '✅ Acceso concedido', 'success');
+            
+            // Guardar sesión
+            localStorage.setItem('catalogo_actual', catalogoActual.id);
+            localStorage.setItem('admin_auth', 'true');
+            
+            // Mostrar panel admin
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('adminSection').classList.remove('hidden');
+            document.getElementById('catalogoNombre').textContent = catalogoActual.nombre;
+            
+            // Aquí cargarías el panel admin específico
+            cargarPanelAdmin();
+        }
+
+        // ========== CARGAR PANEL ADMIN ==========
+        function cargarPanelAdmin() {
+            // Aquí iría el código para cargar y editar productos
+            // Por ahora, mostramos un mensaje
+            const content = document.getElementById('adminContent');
+            content.innerHTML = `
+                <p>📦 Administrando: <strong>${catalogoActual.nombre}</strong></p>
+                <p>Repositorio: ${catalogoActual.repo}</p>
+                <p>URL del catálogo: <a href="${catalogoActual.url}" target="_blank">${catalogoActual.url}</a></p>
+                <hr />
+                <p>⚠️ El panel admin completo se agregará en la siguiente fase.</p>
+                <button class="btn-primary" onclick="cerrarSesion()">Cerrar Sesión</button>
+            `;
+        }
+
+        // ========== CERRAR SESIÓN ==========
+        function cerrarSesion() {
+            localStorage.removeItem('catalogo_actual');
+            localStorage.removeItem('admin_auth');
+            location.reload();
+        }
+
+        // ========== MOSTRAR MENSAJE ==========
+        function mostrarMensaje(div, texto, tipo) {
+            div.textContent = texto;
+            div.className = `message ${tipo}`;
+            div.classList.remove('hidden');
+        }
+
+        // ========== VERIFICAR SESIÓN ==========
+        (function verificarSesion() {
+            const auth = localStorage.getItem('admin_auth');
+            const id = localStorage.getItem('catalogo_actual');
+            
+            if (auth === 'true' && id) {
+                catalogoActual = catalogos.find(c => c.id === id);
+                if (catalogoActual) {
+                    document.getElementById('loginSection').classList.add('hidden');
+                    document.getElementById('adminSection').classList.remove('hidden');
+                    document.getElementById('catalogoNombre').textContent = catalogoActual.nombre;
+                    cargarPanelAdmin();
+                }
+            }
+        })();
+
+        // ========== INICIALIZAR ==========
+        cargarConfiguracion();
+    </script>
+</body>
+</html>

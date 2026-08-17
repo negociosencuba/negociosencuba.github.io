@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin - Gestión de Catálogos</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #f5f7fa;
+            font-weight: 600;
+        }
+        .btn-danger { background: #c62828; color: white; }
+        .btn-success { background: #2e7d32; color: white; }
+        .btn-warning { background: #f57c00; color: white; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Super Admin - Gestión de Catálogos</h1>
+        
+        <!-- Resumen -->
+        <div class="stats">
+            <p>📊 Total de catálogos: <span id="totalCatalogos">0</span></p>
+        </div>
+        
+        <!-- Formulario para crear nuevo catálogo -->
+        <h2>➕ Crear Nuevo Catálogo</h2>
+        <form id="nuevoCatalogoForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del catálogo:</label>
+                    <input type="text" id="nombreCatalogo" placeholder="Ej: catalogo3" required />
+                </div>
+                <div class="form-group">
+                    <label>Usuario:</label>
+                    <input type="text" id="usuarioCatalogo" placeholder="Ej: Carlos" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="text" id="passwordCatalogo" placeholder="Ej: carlos2026" required />
+            </div>
+            <button class="btn-primary" type="submit">✅ Crear Catálogo</button>
+        </form>
+        
+        <hr />
+        
+        <!-- Lista de catálogos existentes -->
+        <h2>📋 Catálogos Existentes</h2>
+        <div id="catalogoList">
+            <div class="loading">Cargando catálogos...</div>
+        </div>
+    </div>
 
+    <script>
+        // ========== CARGAR CATÁLOGOS ==========
+        async function cargarCatalogos() {
+            try {
+                const response = await fetch('config.json');
+                const data = await response.json();
+                const catalogos = data.catalogos;
+                
+                document.getElementById('totalCatalogos').textContent = catalogos.length;
+                
+                const list = document.getElementById('catalogoList');
+                
+                if (catalogos.length === 0) {
+                    list.innerHTML = '<p>No hay catálogos creados.</p>';
+                    return;
+                }
+                
+                list.innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Catálogo</th>
+                                <th>Usuario</th>
+                                <th>URL</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${catalogos.map(c => `
+                                <tr>
+                                    <td><strong>${c.nombre}</strong></td>
+                                    <td>${c.usuario}</td>
+                                    <td><a href="${c.url}" target="_blank">${c.url}</a></td>
+                                    <td>${c.activo ? '✅ Activo' : '❌ Inactivo'}</td>
+                                    <td class="actions">
+                                        <button class="btn-success" onclick="generarAdmin('${c.id}')">📄 Admin</button>
+                                        <button class="btn-warning" onclick="editarCatalogo('${c.id}')">✏️</button>
+                                        <button class="btn-danger" onclick="eliminarCatalogo('${c.id}')">🗑️</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('catalogoList').innerHTML = `
+                    <div class="error">❌ Error cargando los catálogos.</div>
+                `;
+            }
+        }
+
+        // ========== FUNCIONES ==========
+        function generarAdmin(id) {
+            alert(`🔑 Generando admin.html para ${id}...\n\n` +
+                  `Esto crearía un archivo admin-${id}.html con el token específico.\n` +
+                  `(Simulación - en producción se descargaría automáticamente)`);
+        }
+
+        function editarCatalogo(id) {
+            alert(`✏️ Editando catálogo ${id}...\n` +
+                  `(Simulación - en producción abriría el formulario de edición)`);
+        }
+
+        function eliminarCatalogo(id) {
+            if (confirm(`¿Estás seguro de eliminar el catálogo "${id}"?`)) {
+                alert(`🗑️ Catálogo "${id}" eliminado (simulación).`);
+            }
+        }
+
+        // ========== CREAR NUEVO CATÁLOGO ==========
+        document.getElementById('nuevoCatalogoForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombreCatalogo').value;
+            const usuario = document.getElementById('usuarioCatalogo').value;
+            const password = document.getElementById('passwordCatalogo').value;
+            
+            // Generar hash de la contraseña
+            const hash = btoa(password);
+            
+            alert(`✅ Nuevo catálogo creado (simulación):\n\n` +
+                  `📁 Nombre: ${nombre}\n` +
+                  `👤 Usuario: ${usuario}\n` +
+                  `🔑 Contraseña: ${password}\n` +
+                  `🔐 Hash: ${hash}\n\n` +
+                  `📌 URL: https://negociosencuba.github.io/${nombre}/\n\n` +
+                  `📝 Para crearlo realmente, necesitas:\n` +
+                  `1. Crear el repositorio ${nombre} en GitHub\n` +
+                  `2. Copiar los archivos de templates/\n` +
+                  `3. Agregar la entrada a config.json`);
+            
+            this.reset();
+            cargarCatalogos(); // Recargar lista
+        };
+
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', cargarCatalogos);
+    </script>
+</body>
+</html>
