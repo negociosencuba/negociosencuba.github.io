@@ -88,7 +88,7 @@
                         <p class="category">${producto.categoria}</p>
                         <p class="description">${producto.descripcion || ''}</p>
                         <div class="product-footer">
-                            <span class="price">$${producto.precio.toFixed(2)}</span>
+                            <span class="price">$${producto.precio ? producto.precio.toFixed(2) : '0.00'}</span>
                         </div>
                     </div>
                 </div>
