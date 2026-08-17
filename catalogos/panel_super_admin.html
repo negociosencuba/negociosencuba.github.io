@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Super Admin - Panel de Control</title>
     <style>
-        /* ============================================================
-           ESTILOS COMPLETOS DEL PANEL SUPER ADMIN
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +20,6 @@
             margin: 0 auto;
         }
 
-        /* ========== LOGIN ========== */
         .login-box {
             max-width: 400px;
             margin: 50px auto;
@@ -85,7 +81,6 @@
             display: none;
         }
 
-        /* ========== HEADER ========== */
         .admin-header {
             background: linear-gradient(135deg, #1a237e, #0d47a1);
             color: white;
@@ -124,7 +119,6 @@
             background: rgba(255, 255, 255, 0.25);
         }
 
-        /* ========== TABS ========== */
         .tabs {
             display: flex;
             gap: 10px;
@@ -162,7 +156,6 @@
             display: block;
         }
 
-        /* ========== ESTADÍSTICAS ========== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -187,7 +180,6 @@
             margin-top: 5px;
         }
 
-        /* ========== FORMULARIOS ========== */
         .form-group {
             margin-bottom: 15px;
         }
@@ -262,7 +254,6 @@
             font-weight: 600;
         }
 
-        /* ========== TABLAS ========== */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -299,20 +290,15 @@
             cursor: pointer;
             font-size: 13px;
         }
-        .btn-edit {
-            background: #e3f2fd;
-            color: #0d47a1;
+        .btn-view {
+            background: #e8f5e9;
+            color: #2e7d32;
         }
         .btn-delete {
             background: #ffebee;
             color: #c62828;
         }
-        .btn-view {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
 
-        /* ========== MENSAJES ========== */
         .success-msg {
             background: #d4edda;
             color: #155724;
@@ -360,7 +346,6 @@
             }
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 600px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -399,9 +384,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- ============================================================
-        LOGIN
-        ============================================================ -->
+        <!-- LOGIN -->
         <div id="loginContainer">
             <div class="login-box">
                 <h1>🔐 Super Admin</h1>
@@ -415,11 +398,8 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        PANEL SUPER ADMIN (oculto hasta login)
-        ============================================================ -->
+        <!-- PANEL ADMIN -->
         <div id="adminContent" style="display:none;">
-            <!-- HEADER -->
             <header class="admin-header">
                 <h1>🔐 Super Admin</h1>
                 <div class="user-info">
@@ -428,16 +408,13 @@
                 </div>
             </header>
 
-            <!-- TABS -->
             <div class="tabs">
                 <div class="tab active" onclick="cambiarTab('dashboard')">📊 Dashboard</div>
                 <div class="tab" onclick="cambiarTab('catalogos')">📁 Catálogos</div>
                 <div class="tab" onclick="cambiarTab('configuracion')">⚙️ Configuración</div>
             </div>
 
-            <!-- ============================================================
-            TAB 1: DASHBOARD
-            ============================================================ -->
+            <!-- DASHBOARD -->
             <div id="tab-dashboard" class="tab-content active">
                 <h2>📊 Resumen General</h2>
                 <div class="stats-grid">
@@ -454,7 +431,6 @@
                         <div class="label">👥 Usuarios</div>
                     </div>
                 </div>
-
                 <div style="background:#f8f9fc; padding:20px; border-radius:12px;">
                     <h3>📌 Accesos rápidos</h3>
                     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
@@ -464,13 +440,9 @@
                 </div>
             </div>
 
-            <!-- ============================================================
-            TAB 2: CATÁLOGOS
-            ============================================================ -->
+            <!-- CATÁLOGOS -->
             <div id="tab-catalogos" class="tab-content">
                 <h2>📁 Gestión de Catálogos</h2>
-
-                <!-- Formulario para crear nuevo catálogo -->
                 <div style="background:#f8f9fc; padding:20px; border-radius:12px; margin-bottom:25px;">
                     <h3>🚀 Crear Nuevo Catálogo</h3>
                     <form id="nuevoCatalogoForm">
@@ -506,20 +478,16 @@
                     <div id="creacionStatus" style="margin-top:15px;"></div>
                 </div>
 
-                <!-- Lista de catálogos existentes -->
                 <h3>📋 Catálogos Existentes</h3>
                 <div id="catalogoList">
                     <div style="text-align:center; padding:20px; color:#666;">Cargando catálogos...</div>
                 </div>
             </div>
 
-            <!-- ============================================================
-            TAB 3: CONFIGURACIÓN
-            ============================================================ -->
+            <!-- CONFIGURACIÓN -->
             <div id="tab-configuracion" class="tab-content">
                 <h2>⚙️ Configuración del Sistema</h2>
 
-                <!-- Cambiar contraseña -->
                 <div style="background:#f8f9fc; padding:20px; border-radius:12px; margin-bottom:20px;">
                     <h3>🔑 Cambiar Contraseña del Super Admin</h3>
                     <form id="cambiarPasswordForm">
@@ -542,7 +510,6 @@
                     <div id="passwordStatus" style="margin-top:10px;"></div>
                 </div>
 
-                <!-- Configuración de Token Super Admin -->
                 <div style="background:#f8f9fc; padding:20px; border-radius:12px; margin-bottom:20px;">
                     <h3>🔑 Token Super Admin</h3>
                     <p style="color:#666; font-size:14px; margin-bottom:10px;">
@@ -556,7 +523,6 @@
                     <div id="tokenStatus" style="margin-top:10px;"></div>
                 </div>
 
-                <!-- Configuración de repositorios -->
                 <div style="background:#f8f9fc; padding:20px; border-radius:12px;">
                     <h3>📁 Configuración de Repositorios</h3>
                     <div class="form-group">
@@ -570,26 +536,16 @@
         </div>
     </div>
 
-    <!-- ========== TOAST ========== -->
     <div class="toast" id="toast"></div>
 
     <script>
-        // ============================================================
-        // CONFIGURACIÓN
-        // ============================================================
-
         const STORAGE_KEY_PASSWORD = 'super_admin_password_hash';
         const STORAGE_KEY_TOKEN = 'super_admin_token';
         const STORAGE_KEY_OWNER = 'super_admin_repo_owner';
 
-        // ============================================================
-        // LOGIN
-        // ============================================================
-
         function acceder() {
             const password = document.getElementById('loginPassword').value;
             const errorDiv = document.getElementById('loginError');
-
             const hashGuardado = localStorage.getItem(STORAGE_KEY_PASSWORD);
 
             if (!hashGuardado) {
@@ -621,12 +577,8 @@
 
             const tokenGuardado = localStorage.getItem(STORAGE_KEY_TOKEN);
             const ownerGuardado = localStorage.getItem(STORAGE_KEY_OWNER);
-            if (tokenGuardado) {
-                document.getElementById('superAdminToken').value = tokenGuardado;
-            }
-            if (ownerGuardado) {
-                document.getElementById('repoOwner').value = ownerGuardado;
-            }
+            if (tokenGuardado) document.getElementById('superAdminToken').value = tokenGuardado;
+            if (ownerGuardado) document.getElementById('repoOwner').value = ownerGuardado;
         }
 
         document.addEventListener('keydown', function(e) {
@@ -642,10 +594,6 @@
             document.getElementById('loginError').style.display = 'none';
         }
 
-        // ============================================================
-        // TABS
-        // ============================================================
-
         function cambiarTab(tab) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
@@ -657,17 +605,9 @@
                 }
             });
 
-            if (tab === 'catalogos') {
-                cargarCatalogos();
-            }
-            if (tab === 'dashboard') {
-                cargarDashboard();
-            }
+            if (tab === 'catalogos') cargarCatalogos();
+            if (tab === 'dashboard') cargarDashboard();
         }
-
-        // ============================================================
-        // DASHBOARD
-        // ============================================================
 
         async function cargarDashboard() {
             try {
@@ -688,18 +628,13 @@
                             const repoData = await repoResponse.json();
                             totalProductos += (repoData.productos || []).length;
                         }
-                    } catch (e) { /* Ignorar */ }
+                    } catch (e) {}
                 }
                 document.getElementById('totalProductos').textContent = totalProductos;
-
             } catch (error) {
                 console.error('Error cargando dashboard:', error);
             }
         }
-
-        // ============================================================
-        // CATÁLOGOS - CREAR
-        // ============================================================
 
         document.getElementById('nuevoCatalogoForm').onsubmit = async function(e) {
             e.preventDefault();
@@ -729,7 +664,6 @@
             }
 
             try {
-                // 1. CREAR REPOSITORIO
                 const repoResponse = await fetch('https://api.github.com/user/repos', {
                     method: 'POST',
                     headers: {
@@ -752,7 +686,6 @@
 
                 statusDiv.innerHTML = '<div class="success-msg">✅ Repositorio creado correctamente</div>';
 
-                // 2. CREAR CARPETA images/ CON .gitkeep
                 const gitkeepContent = '# Carpeta para imágenes del catálogo\n# Sube aquí las imágenes de tus productos.';
                 const encodedGitkeep = btoa(unescape(encodeURIComponent(gitkeepContent)));
 
@@ -781,7 +714,6 @@
                     console.warn('Error al crear images/', error);
                 }
 
-                // 3. GENERAR ARCHIVOS
                 const hash = btoa(password);
                 const adminHTML = generarAdminHTML(id, nombre, usuario, password, tokenUsuario);
                 const indexHTML = generarIndexHTML(nombre);
@@ -795,7 +727,6 @@
                     'style.css': styleCSS
                 };
 
-                // 4. SUBIR ARCHIVOS
                 statusDiv.innerHTML = '<div class="success-msg">⏳ Subiendo archivos...</div>';
 
                 for (const [ruta, contenido] of Object.entries(archivos)) {
@@ -822,7 +753,6 @@
                     }
                 }
 
-                // 5. ACTUALIZAR config.json
                 await actualizarConfigJson(id, nombre, usuario, hash, owner);
 
                 statusDiv.innerHTML = `
@@ -848,16 +778,12 @@
             }
         };
 
-        // ============================================================
-        // ACTUALIZAR config.json
-        // ============================================================
-
         async function actualizarConfigJson(id, nombre, usuario, hash, owner) {
             let configActual = { catalogos: [] };
             try {
                 const response = await fetch('config.json');
                 configActual = await response.json();
-            } catch (e) { /* Si no existe, empezar con uno vacío */ }
+            } catch (e) {}
 
             const nuevoCatalogo = {
                 id: id,
@@ -889,7 +815,7 @@
                     const fileData = await fileResponse.json();
                     sha = fileData.sha;
                 }
-            } catch (e) { /* El archivo no existe, se creará */ }
+            } catch (e) {}
 
             const payload = {
                 message: `Agregar catálogo: ${nombre}`,
@@ -915,10 +841,6 @@
                 throw new Error(error.message || 'Error al actualizar config.json');
             }
         }
-
-        // ============================================================
-        // CATÁLOGOS - LISTAR
-        // ============================================================
 
         async function cargarCatalogos() {
             try {
@@ -960,7 +882,6 @@
                         </tbody>
                     </table>
                 `;
-
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('catalogoList').innerHTML = `
@@ -979,10 +900,6 @@
                 alert('🗑️ Eliminación simulada. Implementa la lógica para eliminar de config.json');
             }
         }
-
-        // ============================================================
-        // CONFIGURACIÓN - CAMBIAR CONTRASEÑA
-        // ============================================================
 
         document.getElementById('cambiarPasswordForm').onsubmit = function(e) {
             e.preventDefault();
@@ -1017,10 +934,6 @@
             setTimeout(() => { status.innerHTML = ''; }, 5000);
         };
 
-        // ============================================================
-        // CONFIGURACIÓN - TOKEN SUPER ADMIN
-        // ============================================================
-
         function guardarTokenSuperAdmin() {
             const token = document.getElementById('superAdminToken').value.trim();
             const status = document.getElementById('tokenStatus');
@@ -1035,10 +948,6 @@
             mostrarToast('✅ Token Super Admin guardado', 'success');
             setTimeout(() => { status.innerHTML = ''; }, 3000);
         }
-
-        // ============================================================
-        // CONFIGURACIÓN - REPOSITORIO OWNER
-        // ============================================================
 
         function guardarConfigRepo() {
             const owner = document.getElementById('repoOwner').value.trim();
@@ -1056,7 +965,7 @@
         }
 
         // ============================================================
-        // GENERAR ARCHIVOS (funciones auxiliares)
+        // GENERAR ARCHIVOS
         // ============================================================
 
         function generarAdminHTML(id, nombre, usuario, password, token) {
