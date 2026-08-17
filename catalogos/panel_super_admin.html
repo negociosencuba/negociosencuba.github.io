@@ -6,65 +6,29 @@
     <title>Super Admin - Gestión de Catálogos</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background: #f5f7fa;
-            font-weight: 600;
-        }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f5f7fa; font-weight: 600; }
         .btn-danger { background: #c62828; color: white; }
         .btn-success { background: #2e7d32; color: white; }
         .btn-warning { background: #f57c00; color: white; }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-        .actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .actions button {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px; }
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .actions button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🔐 Super Admin - Gestión de Catálogos</h1>
-        
+
         <!-- Resumen -->
         <div class="stats">
             <p>📊 Total de catálogos: <span id="totalCatalogos">0</span></p>
         </div>
-        
+
         <!-- Formulario para crear nuevo catálogo -->
         <h2>➕ Crear Nuevo Catálogo</h2>
         <form id="nuevoCatalogoForm">
@@ -84,9 +48,9 @@
             </div>
             <button class="btn-primary" type="submit">✅ Crear Catálogo</button>
         </form>
-        
+
         <hr />
-        
+
         <!-- Lista de catálogos existentes -->
         <h2>📋 Catálogos Existentes</h2>
         <div id="catalogoList">
@@ -101,16 +65,16 @@
                 const response = await fetch('config.json');
                 const data = await response.json();
                 const catalogos = data.catalogos;
-                
+
                 document.getElementById('totalCatalogos').textContent = catalogos.length;
-                
+
                 const list = document.getElementById('catalogoList');
-                
+
                 if (catalogos.length === 0) {
                     list.innerHTML = '<p>No hay catálogos creados.</p>';
                     return;
                 }
-                
+
                 list.innerHTML = `
                     <table>
                         <thead>
@@ -139,7 +103,7 @@
                         </tbody>
                     </table>
                 `;
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('catalogoList').innerHTML = `
@@ -169,14 +133,14 @@
         // ========== CREAR NUEVO CATÁLOGO ==========
         document.getElementById('nuevoCatalogoForm').onsubmit = function(e) {
             e.preventDefault();
-            
+
             const nombre = document.getElementById('nombreCatalogo').value;
             const usuario = document.getElementById('usuarioCatalogo').value;
             const password = document.getElementById('passwordCatalogo').value;
-            
+
             // Generar hash de la contraseña
             const hash = btoa(password);
-            
+
             alert(`✅ Nuevo catálogo creado (simulación):\n\n` +
                   `📁 Nombre: ${nombre}\n` +
                   `👤 Usuario: ${usuario}\n` +
@@ -187,9 +151,9 @@
                   `1. Crear el repositorio ${nombre} en GitHub\n` +
                   `2. Copiar los archivos de templates/\n` +
                   `3. Agregar la entrada a config.json`);
-            
+
             this.reset();
-            cargarCatalogos(); // Recargar lista
+            cargarCatalogos();
         };
 
         // ========== INICIALIZAR ==========
